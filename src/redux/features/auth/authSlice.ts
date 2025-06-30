@@ -4,7 +4,9 @@ import type { RootState } from "../../store";
 // User type based on JWT payload
 export interface TUser {
   userId: string;
+  name: string;
   email: string;
+  photoUrl: string;
   exp: number;
   iat: number;
 }
