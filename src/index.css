@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #171717 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100 dark:bg-neutral-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-400 dark:bg-primary-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-500 dark:bg-primary-500;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0;
+}
+
+.btn-secondary {
+  @apply bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0;
+}
+
+.btn-accent {
+  @apply bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0;
+}
+
+.btn-outline {
+  @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0;
+}
+
+.btn-ghost {
+  @apply text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20 font-medium py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-white/20 dark:border-neutral-700/50 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-2;
+}
+
+/* Form Styles */
+.form-input {
+  @apply w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white/50 dark:bg-neutral-800/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-500;
+}
+
+.form-input:focus {
+  @apply shadow-glow;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2;
+}
+
+.form-error {
+  @apply text-red-500 text-sm mt-1;
+}
+
+/* Container */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-4 border-primary-200 border-t-primary-600;
+}
+
+/* Backdrop blur for modals */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50;
+}
+
+.modal-content {
+  @apply bg-white dark:bg-neutral-800 rounded-xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300;
+}
+
+/* Responsive text */
+.text-responsive {
+  @apply text-base sm:text-lg md:text-xl lg:text-2xl;
+}
+
+/* Hero section specific */
+.hero-gradient {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fdf4ff 100%);
+}
+
+.dark .hero-gradient {
+  background: linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #4a044e 100%);
+}
+
+/* Navbar glass effect */
+.navbar-glass {
+  @apply bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border-b border-white/20 dark:border-neutral-700/50;
+}
+
+/* Event card specific */
+.event-card {
+  @apply card p-6 hover:scale-105 transition-transform duration-300;
+}
+
+/* Search and filter styles */
+.search-container {
+  @apply glass rounded-xl p-6 mb-8;
+}
+
+/* Profile dropdown */
+.profile-dropdown {
+  @apply absolute right-0 top-12 w-48 glass rounded-lg shadow-xl border border-white/20 dark:border-neutral-700/50 overflow-hidden z-50;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+  @apply p-2 rounded-lg bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors duration-200;
+}
+
+/* Success/Error messages */
+.alert-success {
+  @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 px-4 py-3 rounded-lg;
+}
+
+.alert-error {
+  @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 px-4 py-3 rounded-lg;
+}
+
+/* Custom checkbox and radio */
+.custom-checkbox {
+  @apply appearance-none w-5 h-5 border-2 border-primary-300 rounded checked:bg-primary-500 checked:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200;
+}
+
+.custom-radio {
+  @apply appearance-none w-5 h-5 border-2 border-primary-300 rounded-full checked:bg-primary-500 checked:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200;
+}
+
+/* Event join button animation */
+.join-btn {
+  @apply btn-primary relative overflow-hidden;
+}
+
+.join-btn::before {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full transition-transform duration-700;
+}
+
+.join-btn:hover::before {
+  @apply translate-x-full;
+}
+
+/* Responsive grid */
+.events-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+/* Date picker styles */
+.date-picker {
+  @apply form-input cursor-pointer;
+}
+
+/* Modal animations */
+.modal-enter {
+  @apply opacity-0 scale-95;
+}
+
+.modal-enter-active {
+  @apply opacity-100 scale-100 transition-all duration-300;
+}
+
+.modal-exit {
+  @apply opacity-100 scale-100;
+}
+
+.modal-exit-active {
+  @apply opacity-0 scale-95 transition-all duration-300;
+}
