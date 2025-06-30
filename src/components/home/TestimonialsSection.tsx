@@ -1,20 +1,4 @@
-import {
-  Star,
-  Quote,
-  User,
-  Calendar,
-  Users,
-  MapPin,
-  Heart,
-  Shield,
-  Plus,
-  Zap,
-  ArrowRight,
-  Search,
-  Filter,
-  Bell,
-  TrendingUp,
-} from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 // Testimonials Section
 const TestimonialsSection = () => {

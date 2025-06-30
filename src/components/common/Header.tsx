@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Calendar, Menu, X, User, LogOut, Sun, Moon } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
