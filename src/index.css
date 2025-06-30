@@ -95,7 +95,12 @@ body {
 .form-error {
   @apply text-red-500 text-sm mt-1;
 }
-
+.alert-error {
+  @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 px-4 py-3 rounded-lg;
+}
+.spinner {
+  @apply border-2 border-t-primary-500 border-r-primary-500 border-b-primary-500 border-l-transparent rounded-full w-5 h-5 animate-spin;
+}
 /* Container */
 .container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;

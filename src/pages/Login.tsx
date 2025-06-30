@@ -1,4 +1,4 @@
-import { Calendar, Mail, Shield, User } from "lucide-react";
+import { Calendar, Mail, Shield } from "lucide-react";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { useLocation, useNavigate } from "react-router-dom";

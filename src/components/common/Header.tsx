@@ -34,8 +34,8 @@ const Header = () => {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Events", href: "/events", protected: true },
-    { name: "Add Event", href: "/add-event", protected: true },
-    { name: "My Events", href: "/my-events", protected: true },
+    { name: "Add Event", href: "/addEvent", protected: true },
+    { name: "My Events", href: "/myEvents", protected: true },
   ];
 
   const handleLogout = () => {
