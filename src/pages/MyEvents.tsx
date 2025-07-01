@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Calendar, Plus, ArrowLeft, Loader } from "lucide-react";
+import { Calendar, Loader } from "lucide-react";
 import type { RootState } from "../redux/store";
 import { useGetMyEventsQuery } from "../redux/features/event/eventApi";
-import SearchFilter from "../components/events/SearchFilter";
+
 import MyEventCard from "../components/events/MyEventCard";
 import Pagination from "../components/common/Pagination";
 import type { TEvent } from "../type/event.type";
 
-const MyEventsPage: React.FC = () => {
+const MyEventsPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.auth.user);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterBy, setFilterBy] = useState("");
   const [page, setPage] = useState(1);
   const limit = 6;
 
@@ -26,8 +24,6 @@ const MyEventsPage: React.FC = () => {
     refetch,
   } = useGetMyEventsQuery({
     userId: user?.userId,
-    searchTerm,
-    filterBy,
     page,
     limit,
   });
@@ -37,46 +33,9 @@ const MyEventsPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Reset to first page when filters change
-  useEffect(() => {
-    setPage(1);
-  }, [searchTerm, filterBy]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-neutral-900 dark:to-neutral-800 py-12">
-      <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <button
-              onClick={() => navigate(-1)}
-              className="btn-ghost inline-flex items-center mb-4 md:mb-0 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back
-            </button>
-            <h1 className="text-3xl font-bold gradient-text">My Events</h1>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Manage all events you've created
-            </p>
-          </div>
-
-          <button
-            onClick={() => navigate("/add-event")}
-            className="btn-primary inline-flex items-center mt-4 md:mt-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-2 px-4 rounded-lg hover:from-primary-600 hover:to-secondary-600 transition-all duration-300"
-          >
-            <Plus className="w-5 h-5 mr-2" />
-            Add New Event
-          </button>
-        </div>
-
-        {/* Search and Filters */}
-        <SearchFilter
-          searchTerm={searchTerm}
-          filterBy={filterBy}
-          setSearchTerm={setSearchTerm}
-          setFilterBy={setFilterBy}
-        />
-
+      <div className="container mx-auto mt-16">
         {/* Loading overlay */}
         {isFetching && (
           <div className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -146,7 +105,7 @@ const MyEventsPage: React.FC = () => {
                     first event!
                   </p>
                   <button
-                    onClick={() => navigate("/add-event")}
+                    onClick={() => navigate("/addEvent")}
                     className="btn-primary bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-2 px-6 rounded-lg hover:from-primary-600 hover:to-secondary-600 transition-all duration-300"
                   >
                     Create Your First Event

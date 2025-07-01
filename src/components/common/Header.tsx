@@ -187,13 +187,6 @@ const Header = () => {
               {/* Conditional Mobile Auth Section */}
               {isAuthenticated ? (
                 <>
-                  <a
-                    href="/profile"
-                    className="block px-4 py-3 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    My Profile
-                  </a>
                   <button
                     onClick={handleLogout}
                     className="w-full flex items-center space-x-2 px-4 py-3 mt-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200"

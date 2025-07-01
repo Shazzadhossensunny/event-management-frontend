@@ -41,16 +41,8 @@ const AddEventPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-neutral-900 dark:to-neutral-800 py-12">
-      <div className="container">
+      <div className="container mx-auto mt-16">
         <div className="max-w-3xl mx-auto">
-          <button
-            onClick={() => navigate(-1)}
-            className="btn-ghost mb-6 inline-flex items-center"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Events
-          </button>
-
           <div className="glass rounded-3xl overflow-hidden shadow-xl">
             <div className="bg-gradient-to-r from-primary-500 to-secondary-500 p-8 text-center">
               <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">

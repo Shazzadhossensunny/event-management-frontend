@@ -4,32 +4,40 @@ const eventApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get all events (Public)
     getAllEvents: builder.query({
-      query: (params = {}) => {
+      query: (params: Record<string, any> = {}) => {
         const queryString = new URLSearchParams();
 
-        // Add all possible query parameters matching backend
-        if (params.searchTerm)
+        // Standardize search parameter (use only one)
+        if (params.searchTerm) {
           queryString.append("searchTerm", params.searchTerm);
-        if (params.search) queryString.append("search", params.search); // Backend handles both search and searchTerm
+        }
+
+        // Add filter parameters
+        if (params.filterBy) queryString.append("filterBy", params.filterBy);
         if (params.category) queryString.append("category", params.category);
         if (params.status) queryString.append("status", params.status);
+
+        // Date range parameters
         if (params.startDate) queryString.append("startDate", params.startDate);
         if (params.endDate) queryString.append("endDate", params.endDate);
-        if (params.filterBy) queryString.append("filterBy", params.filterBy); // today, current-week, last-week, current-month, last-month
+
+        // Pagination
+        if (params.page) queryString.append("page", params.page.toString());
+        if (params.limit) queryString.append("limit", params.limit.toString());
+
+        // Sorting
+        if (params.sort) queryString.append("sort", params.sort);
+
+        // Other parameters
         if (params.minPoints)
           queryString.append("minPoints", params.minPoints.toString());
         if (params.maxPoints)
           queryString.append("maxPoints", params.maxPoints.toString());
         if (params.userId) queryString.append("userId", params.userId);
-        if (params.sort) queryString.append("sort", params.sort);
-        if (params.page) queryString.append("page", params.page.toString());
-        if (params.limit) queryString.append("limit", params.limit.toString());
         if (params.fields) queryString.append("fields", params.fields);
 
         return {
-          url: `/events${
-            queryString.toString() ? `?${queryString.toString()}` : ""
-          }`,
+          url: `/events?${queryString.toString()}`,
           method: "GET",
         };
       },
