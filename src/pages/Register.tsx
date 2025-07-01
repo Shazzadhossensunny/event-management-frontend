@@ -141,7 +141,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="url" className="form-label">
+              <label htmlFor="photoUrl" className="form-label">
                 Profile Photo URL
               </label>
               <div className="relative">
@@ -162,15 +162,17 @@ export default function Register() {
                   </svg>
                 </div>
                 <input
-                  type="url"
-                  {...register("url", { required: "PhotoUrl is required" })}
+                  type="text"
+                  {...register("photoUrl", {
+                    required: "PhotoUrl is required",
+                  })}
                   className="form-input pl-10"
                   placeholder="https://example.com/photo.jpg"
                 />
               </div>
-              {errors.url && (
+              {errors.photoUrl && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.url.message as string}
+                  {errors.photoUrl.message as string}
                 </p>
               )}
             </div>

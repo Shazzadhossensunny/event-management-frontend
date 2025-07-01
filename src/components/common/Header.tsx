@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
 import { logout } from "../../redux/features/auth/authSlice";
 import { toggleDarkMode } from "../../redux/features/theme/themeSlice";
+import { useGetAllUserProfileQuery } from "../../redux/features/user/userApi";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,19 @@ const Header = () => {
   );
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
+  // Fetch user profile data
+  const {
+    data: userProfile,
+    isLoading: isProfileLoading,
+    isError: isProfileError,
+  } = useGetAllUserProfileQuery([], {
+    skip: !isAuthenticated,
+  });
+
+  const currentUser =
+    userProfile?.data?.users?.find((u: any) => u._id === user?.userId) || user;
+
+  console.log("current", currentUser);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -98,10 +112,10 @@ const Header = () => {
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center space-x-2 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
                 >
-                  {user?.photoUrl ? (
+                  {currentUser?.photoUrl ? (
                     <img
-                      src={user.photoUrl}
-                      alt={user.name}
+                      src={currentUser.photoUrl}
+                      alt={currentUser.name}
                       className="w-8 h-8 rounded-full object-cover ring-2 ring-primary-500"
                     />
                   ) : (
@@ -109,22 +123,17 @@ const Header = () => {
                       <User className="w-4 h-4 text-white" />
                     </div>
                   )}
-                  <span className="hidden sm:block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    {user?.name}
-                  </span>
                 </button>
 
                 {/* Profile Dropdown */}
                 {isProfileOpen && (
                   <div className="profile-dropdown glass">
                     <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700">
-                      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                        {user?.name}
-                      </p>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                        {user?.email}
+                      <p className="text-sm uppercase font-medium text-neutral-900 dark:text-neutral-100">
+                        {currentUser?.name}
                       </p>
                     </div>
+
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center space-x-2 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors duration-200"
@@ -177,13 +186,22 @@ const Header = () => {
 
               {/* Conditional Mobile Auth Section */}
               {isAuthenticated ? (
-                <button
-                  onClick={handleLogout}
-                  className="w-full flex items-center space-x-2 px-4 py-3 mt-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
+                <>
+                  <a
+                    href="/profile"
+                    className="block px-4 py-3 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Profile
+                  </a>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center space-x-2 px-4 py-3 mt-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Logout</span>
+                  </button>
+                </>
               ) : (
                 <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700 space-y-2">
                   <a
