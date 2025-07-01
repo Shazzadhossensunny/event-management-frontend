@@ -19,7 +19,6 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

@@ -59,7 +59,7 @@ const eventApi = baseApi.injectEndpoints({
 
     // Update event (Protected)
     updateEvent: builder.mutation({
-      query: ({ eventId, data }) => ({
+      query: ({ eventId, ...data }) => ({
         url: `/events/${eventId}`,
         method: "PATCH",
         body: data,

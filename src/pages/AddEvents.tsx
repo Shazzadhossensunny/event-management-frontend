@@ -1,4 +1,3 @@
-// src/pages/AddEventPage.tsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,8 +15,7 @@ const AddEventPage = () => {
     (state: RootState) => state.auth.isAuthenticated
   );
   const user = useSelector((state: RootState) => state.auth.user);
-  const [createEvent, { isLoading, isSuccess, error }] =
-    useCreateEventMutation();
+  const [createEvent, { isLoading, error }] = useCreateEventMutation();
 
   useEffect(() => {
     if (!isAuthenticated) {

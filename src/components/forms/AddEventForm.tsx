@@ -1,7 +1,8 @@
 // src/components/forms/AddEventForm.tsx
-import { Calendar, MapPin, Text, Users } from "lucide-react";
-import { useForm, type SubmitHandler, type FieldValues } from "react-hook-form";
+import { Calendar, MapPin, Text, Users, User } from "lucide-react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import Loader from "../common/Loader";
+import { useEffect } from "react";
 
 export type EventFormData = {
   title: string;
@@ -16,30 +17,53 @@ type EventFormProps = {
   onSubmit: (data: EventFormData) => void;
   isLoading?: boolean;
   error?: string | null;
+  defaultValues?: EventFormData;
 };
 
-const AddEventForm = ({ onSubmit, isLoading, error }: EventFormProps) => {
+const AddEventForm = ({
+  onSubmit,
+  isLoading,
+  error,
+  defaultValues,
+}: EventFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<EventFormData>({
-    defaultValues: {
+    defaultValues: defaultValues || {
+      title: "",
+      name: "",
+      description: "",
+      dateTime: "",
+      location: "",
       attendeeCount: 0,
     },
   });
 
-  const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("before submit data", data);
+  // Reset form when defaultValues change
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues, reset]);
+
+  const handleFormSubmit: SubmitHandler<EventFormData> = (data) => {
+    // Convert to ISO format
     const localDate = new Date(data.dateTime);
     const isoDate = localDate.toISOString();
+
     onSubmit({
       ...data,
       dateTime: isoDate,
       attendeeCount: Number(data.attendeeCount),
-    } as EventFormData);
-    reset();
+    });
+
+    // Only reset if it's a new event (not update)
+    if (!defaultValues) {
+      reset();
+    }
   };
 
   return (
@@ -66,6 +90,7 @@ const AddEventForm = ({ onSubmit, isLoading, error }: EventFormProps) => {
           </p>
         )}
       </div>
+
       {/* Name */}
       <div>
         <label htmlFor="name" className="form-label">
@@ -73,12 +98,12 @@ const AddEventForm = ({ onSubmit, isLoading, error }: EventFormProps) => {
         </label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Text className="w-5 h-5 text-neutral-400" />
+            <User className="w-5 h-5 text-neutral-400" />
           </div>
           <input
             id="name"
             className="form-input pl-10"
-            placeholder="Event Title"
+            placeholder="Your Name"
             {...register("name", { required: "Name is required" })}
           />
         </div>
@@ -122,6 +147,7 @@ const AddEventForm = ({ onSubmit, isLoading, error }: EventFormProps) => {
           </p>
         )}
       </div>
+
       {/* Attendance Count */}
       <div>
         <label htmlFor="attendeeCount" className="form-label">
@@ -200,7 +226,13 @@ const AddEventForm = ({ onSubmit, isLoading, error }: EventFormProps) => {
           disabled={isLoading}
           className="btn-primary w-full"
         >
-          {isLoading ? <Loader /> : "Create Event"}
+          {isLoading ? (
+            <Loader />
+          ) : defaultValues ? (
+            "Update Event"
+          ) : (
+            "Create Event"
+          )}
         </button>
       </div>
     </form>

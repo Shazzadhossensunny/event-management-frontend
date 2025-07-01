@@ -1,20 +1,22 @@
 export interface TEvent {
-  id: string;
-  eventTitle: string;
+  _id: string;
+  title: string;
   name: string;
   dateTime: string;
   location: string;
   description: string;
   attendeeCount: number;
+  hasJoined?: boolean;
+  createdBy: string;
+  attendees: string[];
   createdAt: string;
   updatedAt: string;
-  userId: string;
 }
-// src/features/events/eventTypes.ts
+
 export interface EventFormData {
   title: string;
   name: string;
-  dateTime: string; // Will be converted to Date object
+  dateTime: string;
   location: string;
   description: string;
   attendeeCount: number;
@@ -25,4 +27,14 @@ export interface TEvent extends EventFormData {
   userId: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface EventsResponse {
+  data: Event[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 }
