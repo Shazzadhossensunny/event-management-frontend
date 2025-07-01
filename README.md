@@ -1,69 +1,133 @@
-# React + TypeScript + Vite
+# Event Management Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional **Event Management Web Application** built with the **MERN Stack** (MongoDB, Express.js, React.js, and Node.js).
 
-Currently, two official plugins are available:
+## ✨ Live Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend Live Link**: [View Site](https://event-management-frontend-ivory.vercel.app/)
+- **Frontend GitHub Repo**: [View on GitHub](https://github.com/Shazzadhossensunny/event-management-frontend)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📄 Project Overview
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Key Features:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+#### 1. Navbar
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Logo + Website Name
+- Home, Events, Add Event, My Event, Sign In (if not logged in)
+- Profile picture with dropdown: User Name (non-clickable), Logout
+
+#### 2. Homepage
+
+- Custom-designed landing page
+
+#### 3. Events (Private Route)
+
+- Displays all events in descending order by date and time
+- Card-style display:
+  - Event Title
+  - Posted By
+  - Date and Time
+  - Location
+  - Description
+  - Attendee Count
+  - Join Event Button
+- Users can only join once
+- Includes **Search by Title**
+- **Filter Options**:
+  - Today
+  - Current Week
+  - Last Week
+  - Current Month
+  - Last Month
+
+#### 4. Add Event (Private Route)
+
+- Fields:
+  - Event Title
+  - Name
+  - Date and Time
+  - Location
+  - Description
+  - Attendee Count (default 0)
+- On submit, event is saved to the database
+
+#### 5. My Events (Private Route)
+
+- Shows events posted by the logged-in user
+- Event Card contains:
+  - All event details
+  - Update button (opens modal or new route)
+  - Delete button (with confirmation)
+
+#### 6. Custom Authentication
+
+- No third-party auth packages used
+- Registration: Name, Email, Password, PhotoURL
+- Login: Email & Password
+- Displays clear error messages
+
+---
+
+## 🚀 Technologies Used
+
+### ⚙️ Frontend (React.js + Vite + Tailwind CSS)
+
+- **React 19** with **TypeScript**
+- **Vite** as build tool
+- **Tailwind CSS** for styling
+- **Redux Toolkit + Redux Persist** for state management
+- **React Hook Form + Zod** for form handling and validation
+- **React Router DOM (v7)** for routing
+- **Lucide React** for icons
+- **Sonner** for toast notifications
+- **JWT Decode** for authentication token decoding
+
+---
+
+## ⚙️ Installation Instructions
+
+```bash
+# 1. Clone the frontend repo
+https://github.com/Shazzadhossensunny/event-management-frontend.git
+
+# 2. Navigate to the project directory
+cd event-management-frontend
+
+# 3. Install dependencies
+npm install
+
+# 4. Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Make sure your backend is also running and correctly connected to MongoDB.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🗂 Project Structure (Frontend)
+
 ```
+src/
+├── components/        # Reusable components
+├── pages/            # All pages (Home, Events, Add, My Events, etc.)
+├── layouts/          # Layout components (e.g., MainLayout)
+├── redux/            # Redux store, slices, API calls
+├── routes/           # Route config for private & public routes
+├── utils/            # Utility functions
+├── hooks/            # Custom hooks (if any)
+└── main.tsx, App.tsx # App entry
+```
+
+---
+
+## ✅ Backend Repo (Required)
+
+Make sure your backend also fulfills the following:
+
+- Custom authentication routes (register/login)
+- Event CRUD APIs
+- Join Event logic with unique user check
+- Filtering, searching, and pagination support

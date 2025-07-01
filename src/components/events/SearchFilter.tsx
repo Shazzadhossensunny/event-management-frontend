@@ -1,6 +1,6 @@
 // src/components/events/SearchFilter.tsx
 import React from "react";
-import { Search, Calendar, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface SearchFilterProps {
   searchTerm: string;

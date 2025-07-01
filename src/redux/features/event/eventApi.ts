@@ -50,9 +50,7 @@ const eventApi = baseApi.injectEndpoints({
         url: `/events/${eventId}`,
         method: "GET",
       }),
-      providesTags: (result, error, eventId) => [
-        { type: "Events", id: eventId },
-      ],
+      providesTags: ["Events"],
     }),
 
     // Create new event (Protected)
@@ -72,10 +70,7 @@ const eventApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { eventId }) => [
-        "Events",
-        { type: "Events", id: eventId },
-      ],
+      invalidatesTags: ["Events"],
     }),
 
     // Delete event (Protected)

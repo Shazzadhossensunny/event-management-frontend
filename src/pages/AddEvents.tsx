@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { toast } from "sonner";
 import type { RootState } from "../redux/store";
 import { useCreateEventMutation } from "../redux/features/event/eventApi";

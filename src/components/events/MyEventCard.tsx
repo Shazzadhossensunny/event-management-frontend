@@ -1,15 +1,6 @@
 // src/components/events/MyEventCard.tsx
 import React, { useState } from "react";
-import {
-  Calendar,
-  MapPin,
-  User,
-  Users,
-  Edit,
-  Trash2,
-  Check,
-  X,
-} from "lucide-react";
+import { Calendar, MapPin, User, Edit, Trash2, Check, X } from "lucide-react";
 
 import { toast } from "sonner";
 import Modal from "../common/Modal";
