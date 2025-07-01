@@ -7,6 +7,7 @@ import AddEvents from "../pages/AddEvents";
 import MyEvents from "../pages/MyEvents";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,15 +20,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/events",
-        element: <Events />,
+        element: (
+          <ProtectedRoute>
+            <Events />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/addEvent",
-        element: <AddEvents />,
+        element: (
+          <ProtectedRoute>
+            <AddEvents />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/myEvents",
-        element: <MyEvents />,
+        element: (
+          <ProtectedRoute>
+            <MyEvents />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
